@@ -1,6 +1,37 @@
-[gd_scene load_steps=2 format=3 uid="uid://chdhygram7hdk"]
+[gd_scene load_steps=5 format=3 uid="uid://chdhygram7hdk"]
 
 [ext_resource type="Script" uid="uid://crwqpwqjancgn" path="res://TestEditor.cs" id="1_mncer"]
+[ext_resource type="PackedScene" uid="uid://bng3wha2ra5ma" path="res://fox/fox.glb" id="2_cguwc"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_wicfy"]
+radius = 0.261467
+height = 1.19311
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cguwc"]
+size = Vector3(3.91336, 1.10742, 3.50903)
 
 [node name="Node3D" type="Node3D"]
 script = ExtResource("1_mncer")
+
+[node name="RigidBody3D" type="RigidBody3D" parent="."]
+axis_lock_angular_y = true
+
+[node name="fox" parent="RigidBody3D" instance=ExtResource("2_cguwc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.871034, 0, -0.770108)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.871034, 0.530092, -0.770108)
+shape = SubResource("CapsuleShape3D_wicfy")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-1, -1.19726e-14, 8.74228e-08, 7.82305e-09, 0.995988, 0.0894854, -8.7072e-08, 0.0894854, -0.995988, 0.882143, 1.8339, -2.61211)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.887401, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0737152, -0.654183, -0.961792)
+shape = SubResource("BoxShape3D_cguwc")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.70713, 1.99286, 0)
