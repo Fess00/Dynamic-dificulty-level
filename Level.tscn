@@ -1,0 +1,75 @@
+[gd_scene load_steps=7 format=3 uid="uid://chdhygram7hdk"]
+
+[ext_resource type="PackedScene" uid="uid://bd5iop1wxlaxd" path="res://Box.tscn" id="2_t7iv1"]
+[ext_resource type="PackedScene" uid="uid://ciisgvtccog6o" path="res://Character.tscn" id="3_2nifc"]
+[ext_resource type="PackedScene" uid="uid://c2lhkdyy7h3ur" path="res://Coin.tscn" id="3_wkftn"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_bexhn"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_t7iv1"]
+size = Vector3(3.23, 0.08, 3.593)
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_t7iv1"]
+bounce = 0.3
+
+[node name="Level" type="Node3D"]
+
+[node name="MainCamera" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.90499, 0.425432, 0, -0.425432, 0.90499, 0, 4.21311, 4.88098)
+
+[node name="Floor" type="StaticBody3D" parent="."]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
+metadata/_edit_group_ = true
+
+[node name="BoxFloor" type="MeshInstance3D" parent="Floor"]
+transform = Transform3D(3.23082, 0, 0, 0, 0.0888563, 0, 0, 0, 3.59348, 0, 0, 0)
+mesh = SubResource("BoxMesh_bexhn")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
+shape = SubResource("BoxShape3D_t7iv1")
+
+[node name="Light" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.442477, 0.89678, 0, -0.89678, -0.442477, -1.01697, 7.27477, -2.93912)
+light_color = Color(1, 1, 0.894118, 1)
+shadow_enabled = true
+
+[node name="CharacterBody3D" parent="." instance=ExtResource("3_2nifc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.314276, 2.42042, -4.32379)
+
+[node name="Boxes" type="Node3D" parent="."]
+
+[node name="Box" parent="Boxes" instance=ExtResource("2_t7iv1")]
+transform = Transform3D(0.7701, 0.635554, 0.0549279, -0.530986, 0.686346, -0.496974, -0.353553, 0.353553, 0.866025, 0, 4.00395, 0)
+mass = 1.0
+physics_material_override = SubResource("PhysicsMaterial_t7iv1")
+
+[node name="Box2" parent="Boxes" instance=ExtResource("2_t7iv1")]
+transform = Transform3D(0.7701, 0.635554, 0.0549279, -0.530986, 0.686346, -0.496974, -0.353553, 0.353553, 0.866025, 0.810079, 4.90363, 1.77926)
+mass = 1.0
+physics_material_override = SubResource("PhysicsMaterial_t7iv1")
+
+[node name="Box3" parent="Boxes" instance=ExtResource("2_t7iv1")]
+transform = Transform3D(0.7701, 0.635554, 0.0549279, -0.530986, 0.686346, -0.496974, -0.353553, 0.353553, 0.866025, 0, 6.56056, -1.22897)
+mass = 1.0
+physics_material_override = SubResource("PhysicsMaterial_t7iv1")
+
+[node name="Box4" parent="Boxes" instance=ExtResource("2_t7iv1")]
+transform = Transform3D(0.7701, 0.635554, 0.0549279, -0.530986, 0.686346, -0.496974, -0.353553, 0.353553, 0.866025, 0, 5.76689, 0)
+mass = 1.0
+physics_material_override = SubResource("PhysicsMaterial_t7iv1")
+
+[node name="Coin" parent="." instance=ExtResource("3_wkftn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.16722, 1.06585, -1.76145)
+
+[node name="Coin2" parent="." instance=ExtResource("3_wkftn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.64865, 1.06585, 2.16899)
+
+[node name="Coin3" parent="." instance=ExtResource("3_wkftn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.64865, 1.06585, -1.76145)
+
+[node name="Coin4" parent="." instance=ExtResource("3_wkftn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.17312, 1.06585, 0.441444)
+
+[node name="Coin5" parent="." instance=ExtResource("3_wkftn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.64865, 1.06585, 0.24114)
