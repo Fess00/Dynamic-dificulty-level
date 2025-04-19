@@ -9,6 +9,12 @@ public partial class CharacterMovement : CharacterBody3D
     private Vector3 _velocity;
     private bool _isDoubleJump;
     private bool _isOrdinaryJump;
+    private int _coinsCollected;
+    
+    public override void _Ready()
+    {
+        
+    }
 
     public override void _PhysicsProcess(double delta)
     {
