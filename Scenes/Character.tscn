@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://ciisgvtccog6o"]
+
+[ext_resource type="Script" uid="uid://dppdvs53dfmoy" path="res://Scripts/CharacterMovement.cs" id="1_oolk3"]
+[ext_resource type="Script" uid="uid://b0kedrvuy7u45" path="res://Scripts/CameraController.cs" id="2_7ig0a"]
+[ext_resource type="PackedScene" uid="uid://bgn5y86ns0ar1" path="res://Scenes/MainCharacter.tscn" id="2_677pu"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_lcuhw"]
+radius = 0.287956
+height = 1.17609
+
+[node name="CharacterBody3D" type="CharacterBody3D" node_paths=PackedStringArray("_model", "_springArm")]
+script = ExtResource("1_oolk3")
+_model = NodePath("fox")
+_springArm = NodePath("CameraPivot/SpringArm3D")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.519744, 0)
+shape = SubResource("CapsuleShape3D_lcuhw")
+
+[node name="fox" parent="." instance=ExtResource("2_677pu")]
+
+[node name="CameraPivot" type="Node3D" parent="."]
+
+[node name="SpringArm3D" type="SpringArm3D" parent="CameraPivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.80047, 0)
+spring_length = 4.0
+margin = 0.2
+script = ExtResource("2_7ig0a")
+
+[node name="CharacterCamera" type="Camera3D" parent="CameraPivot/SpringArm3D"]
+transform = Transform3D(1, 0, 0, 0, 0.95436, 0.298658, 0, -0.298658, 0.95436, 0.0563309, 0.570433, 2.93923)

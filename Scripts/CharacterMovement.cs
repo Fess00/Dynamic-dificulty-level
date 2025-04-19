@@ -1,55 +1,87 @@
 using Godot;
+using System;
+using System.Diagnostics;
 
 public partial class CharacterMovement : CharacterBody3D
 {
+    [Export]
+    private Node3D _model;
+    [Export]
+    private SpringArm3D _springArm;
+
+    private AnimationPlayer _animation;
+
     private const float Speed = 4.0f;
     private const float JumpForce = 5.0f;
+    private const float Gravity = 2.0f;
+
     private Vector3 _direction;
     private Vector2 _input;
     private Vector3 _velocity;
+    private Vector2 _lookDirection;
     private bool _isDoubleJump;
     private bool _isOrdinaryJump;
     private int _coinsCollected;
-    
+
+    private bool _wasOnFloor;
+    private bool _justTouchedGround;
+    private bool _isCurrentlyOnFloor;
+    private bool _justJumped;
+
     public override void _Ready()
     {
-        
+        _animation = _model.GetNodeOrNull<AnimationPlayer>("AnimationPlayer");
+        if (_animation == null)
+            GD.PrintErr("AnimationPlayer не найден!");
+
+        _justTouchedGround = false;
+        _wasOnFloor = true;
+        _justJumped = false;
     }
 
     public override void _PhysicsProcess(double delta)
     {
         _velocity = Velocity;
+        _isCurrentlyOnFloor = IsOnFloor();
+        _justTouchedGround = !_wasOnFloor && _isCurrentlyOnFloor;
 
-        if (!IsOnFloor())
+        if (!_isCurrentlyOnFloor)
             _velocity += GetGravity() * (float)delta;
 
-        if (IsOnFloor())
+        if (_isCurrentlyOnFloor)
             _isOrdinaryJump = true;
 
-        if (Input.IsActionJustPressed("jump") && IsOnFloor())
+        if (Input.IsActionJustPressed("jump") && _isCurrentlyOnFloor)
         {
             _isDoubleJump = true;
             _velocity.Y = JumpForce;
+            _justJumped = true;
+            PlayAnim("Jump");
         }
 
-        if (Input.IsActionJustPressed("jump") && _isDoubleJump && !IsOnFloor())
+        if (Input.IsActionJustPressed("jump") && _isDoubleJump &&  !_isCurrentlyOnFloor)
         {
             _velocity.Y = JumpForce;
             _isDoubleJump = false;
             _isOrdinaryJump = false;
+            _justJumped = true;
+            PlayAnim("Jump");
         }
-        else if (Input.IsActionJustPressed("jump") && !IsOnFloor() && _isOrdinaryJump)
+        else if (Input.IsActionJustPressed("jump") && !_isCurrentlyOnFloor && _isOrdinaryJump)
         {
             _velocity.Y = JumpForce;
             _isOrdinaryJump = false;
+            _justJumped = true;
+            PlayAnim("Jump");
         }
-        
+
         _input = Input.GetVector("left", "right", "up", "down");
         _direction = (Transform.Basis * new Vector3(_input.X, 0, _input.Y)).Normalized();
+        _direction = _direction.Rotated(Vector3.Up, _springArm.Rotation.Y).Normalized();
 
         if (_direction != Vector3.Zero)
         {
-            _velocity.X = _direction.X * Speed ;
+            _velocity.X = _direction.X * Speed;
             _velocity.Z = _direction.Z * Speed;
         }
         else
@@ -58,7 +90,54 @@ public partial class CharacterMovement : CharacterBody3D
             _velocity.Z = Mathf.MoveToward(_velocity.Z, 0, Speed);
         }
 
+        if (_velocity.Length() > 0.2f && (_direction != Vector3.Zero || _isCurrentlyOnFloor))
+        {
+            _lookDirection = new Vector2(_velocity.Z, _velocity.X);
+            float targetAngle = _lookDirection.Angle();
+            float currentAngle = _model.Rotation.Y;
+
+            float smoothAngle = Mathf.LerpAngle(currentAngle, targetAngle, (float)delta * 10.0f);
+            _model.Rotation = new Vector3(0, smoothAngle, 0);
+        }
+
+        ManageAnimation();
+
+        _wasOnFloor = _isCurrentlyOnFloor;
+
         Velocity = _velocity;
         MoveAndSlide();
+    }
+
+    private void PlayAnim(string name)
+    {
+        if (_animation.CurrentAnimation == name)
+            return;
+
+        if (name == "Jump")
+            _animation.Play("Jump", customSpeed: 2.5f);
+        else
+            _animation.Play(name);
+    }
+
+    private void ManageAnimation()
+    {
+        if (_animation != null)
+        {
+            if (_justTouchedGround)
+            {
+                PlayAnim("TouchGround");
+                _justJumped = false;
+            }
+            else if (!_isCurrentlyOnFloor && _velocity.Y < -0.001f)
+            {
+                PlayAnim("Fall");
+            }
+            else if (_isCurrentlyOnFloor && !_justJumped)
+            {
+                string moveAnim = _velocity.Length() > 0.2f ? "Run" : "Idle";
+                if (!_animation.IsPlaying() || _animation.CurrentAnimation != moveAnim)
+                    PlayAnim(moveAnim);
+            }
+        }
     }
 }

@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=3 uid="uid://chdhygram7hdk"]
 
-[ext_resource type="PackedScene" uid="uid://bd5iop1wxlaxd" path="res://Box.tscn" id="2_t7iv1"]
-[ext_resource type="PackedScene" uid="uid://ciisgvtccog6o" path="res://Character.tscn" id="3_2nifc"]
-[ext_resource type="PackedScene" uid="uid://c2lhkdyy7h3ur" path="res://Coin.tscn" id="3_wkftn"]
+[ext_resource type="PackedScene" uid="uid://bd5iop1wxlaxd" path="res://Scenes/Box.tscn" id="2_t7iv1"]
+[ext_resource type="PackedScene" uid="uid://ciisgvtccog6o" path="res://Scenes/Character.tscn" id="3_2nifc"]
+[ext_resource type="PackedScene" uid="uid://c2lhkdyy7h3ur" path="res://Scenes/Coin.tscn" id="3_wkftn"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_bexhn"]
 
@@ -13,9 +13,6 @@ size = Vector3(3.23, 0.08, 3.593)
 bounce = 0.3
 
 [node name="Level" type="Node3D"]
-
-[node name="MainCamera" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.90499, 0.425432, 0, -0.425432, 0.90499, 0, 4.21311, 4.88098)
 
 [node name="Floor" type="StaticBody3D" parent="."]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
@@ -35,7 +32,7 @@ light_color = Color(1, 1, 0.894118, 1)
 shadow_enabled = true
 
 [node name="CharacterBody3D" parent="." instance=ExtResource("3_2nifc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.314276, 2.42042, -4.32379)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.88159, 0.978029, 4.42752)
 
 [node name="Boxes" type="Node3D" parent="."]
 
