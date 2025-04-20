@@ -1,6 +1,4 @@
 using Godot;
-using System;
-using System.Diagnostics;
 
 public partial class CharacterMovement : CharacterBody3D
 {
@@ -19,6 +17,7 @@ public partial class CharacterMovement : CharacterBody3D
     private Vector2 _input;
     private Vector3 _velocity;
     private Vector2 _lookDirection;
+    private Vector3 _dashDirection;
     private bool _isDoubleJump;
     private bool _isOrdinaryJump;
     private int _coinsCollected;
@@ -27,16 +26,34 @@ public partial class CharacterMovement : CharacterBody3D
     private bool _justTouchedGround;
     private bool _isCurrentlyOnFloor;
     private bool _justJumped;
+    private bool _isDashing;
+    private float _dashSpeed;
+    private float _dashDuration;
+    private float _dashTimer;
+    private bool _canAirDash;
+    private bool _canDash;
+    private float _dashCooldown;
+    private float _dashCooldownTimer;
 
     public override void _Ready()
     {
         _animation = _model.GetNodeOrNull<AnimationPlayer>("AnimationPlayer");
         if (_animation == null)
             GD.PrintErr("AnimationPlayer не найден!");
+        else 
+            _animation.AnimationFinished += OnAnimationFinished;
 
         _justTouchedGround = false;
         _wasOnFloor = true;
         _justJumped = false;
+        _isDashing = false;
+        _canAirDash = true;
+
+        _dashDuration = 1f;
+        _dashTimer = 0f;
+        _dashSpeed = 10f;
+        _dashCooldown = 0.7f;
+        _dashCooldownTimer = 0f;
     }
 
     public override void _PhysicsProcess(double delta)
@@ -49,7 +66,10 @@ public partial class CharacterMovement : CharacterBody3D
             _velocity += GetGravity() * (float)delta;
 
         if (_isCurrentlyOnFloor)
+        {
             _isOrdinaryJump = true;
+            _canAirDash = true;
+        }
 
         if (Input.IsActionJustPressed("jump") && _isCurrentlyOnFloor)
         {
@@ -73,6 +93,26 @@ public partial class CharacterMovement : CharacterBody3D
             _isOrdinaryJump = false;
             _justJumped = true;
             PlayAnim("Jump");
+        }
+
+        if (Input.IsActionJustPressed("dash") && !_isDashing)
+        {
+            bool canDash = _canDash && (_isCurrentlyOnFloor || _canAirDash);
+
+            if (canDash)
+            {
+                _isDashing = true;
+                _dashTimer = _dashDuration;
+                _dashDirection = _direction != Vector3.Zero ? _direction : _model.GlobalTransform.Basis.Z;
+
+                _canDash = false;
+                _dashCooldownTimer = _dashCooldown;
+
+                if (!_isCurrentlyOnFloor)
+                    _canAirDash = false;
+                
+                PlayAnim("Dash");
+            }
         }
 
         _input = Input.GetVector("left", "right", "up", "down");
@@ -100,7 +140,35 @@ public partial class CharacterMovement : CharacterBody3D
             _model.Rotation = new Vector3(0, smoothAngle, 0);
         }
 
+        if (_isDashing)
+        {
+            _dashTimer -= (float)delta;
+
+            _velocity.X = _dashDirection.X * _dashSpeed;
+            _velocity.Z = _dashDirection.Z * _dashSpeed;
+            _velocity.Y = 0;
+
+            if (_dashTimer <= 0f)
+            {
+                _isDashing = false;
+            }
+
+            Velocity = _velocity;
+            MoveAndSlide();
+            return;
+        }
+
         ManageAnimation();
+
+        if (!_canDash)
+        {
+            _dashCooldownTimer -= (float)delta;
+            if (_dashCooldownTimer <= 0f)
+            {
+                _canDash = true;
+                _canAirDash = true;
+            }
+        }
 
         _wasOnFloor = _isCurrentlyOnFloor;
 
@@ -121,7 +189,7 @@ public partial class CharacterMovement : CharacterBody3D
 
     private void ManageAnimation()
     {
-        if (_animation != null)
+        if (_animation != null && !_isDashing)
         {
             if (_justTouchedGround)
             {
@@ -138,6 +206,14 @@ public partial class CharacterMovement : CharacterBody3D
                 if (!_animation.IsPlaying() || _animation.CurrentAnimation != moveAnim)
                     PlayAnim(moveAnim);
             }
+        }
+    }
+
+    private void OnAnimationFinished(StringName animName)
+    {
+        if (animName == "Dash")
+        {
+            _isDashing = false;
         }
     }
 }
