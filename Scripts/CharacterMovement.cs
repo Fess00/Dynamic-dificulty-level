@@ -34,14 +34,15 @@ public partial class CharacterMovement : CharacterBody3D
     private bool _canDash;
     private float _dashCooldown;
     private float _dashCooldownTimer;
+    private int _health;
+
+    public bool IsInvulnerable { get; private set; }
 
     public override void _Ready()
     {
         _animation = _model.GetNodeOrNull<AnimationPlayer>("AnimationPlayer");
         if (_animation == null)
             GD.PrintErr("AnimationPlayer не найден!");
-        else 
-            _animation.AnimationFinished += OnAnimationFinished;
 
         _justTouchedGround = false;
         _wasOnFloor = true;
@@ -49,11 +50,14 @@ public partial class CharacterMovement : CharacterBody3D
         _isDashing = false;
         _canAirDash = true;
 
-        _dashDuration = 1f;
+        _dashDuration = 0.3f;
         _dashTimer = 0f;
         _dashSpeed = 10f;
         _dashCooldown = 0.7f;
         _dashCooldownTimer = 0f;
+        _health = 3;
+
+        IsInvulnerable = false;
     }
 
     public override void _PhysicsProcess(double delta)
@@ -111,6 +115,7 @@ public partial class CharacterMovement : CharacterBody3D
                 if (!_isCurrentlyOnFloor)
                     _canAirDash = false;
                 
+                SetInvulnerable(true);
                 PlayAnim("Dash");
             }
         }
@@ -151,6 +156,7 @@ public partial class CharacterMovement : CharacterBody3D
             if (_dashTimer <= 0f)
             {
                 _isDashing = false;
+                SetInvulnerable(false);
             }
 
             Velocity = _velocity;
@@ -209,11 +215,24 @@ public partial class CharacterMovement : CharacterBody3D
         }
     }
 
-    private void OnAnimationFinished(StringName animName)
+    public void TakeDamage(int amount)
     {
-        if (animName == "Dash")
+        _health -= amount;
+
+        if (_health <= 0)
         {
-            _isDashing = false;
+            RestartGame();
         }
+    }
+
+    public void SetInvulnerable(bool value)
+    {
+        IsInvulnerable = value;
+    }
+
+    private void RestartGame()
+    {
+        var currentScene = GetTree().CurrentScene.SceneFilePath;
+        GetTree().ChangeSceneToFile(currentScene);
     }
 }

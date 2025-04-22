@@ -8,16 +8,6 @@
 [ext_resource type="Animation" uid="uid://b6lp7veqdrklc" path="res://fox/CustomTracks/Run.res" id="6_5q28e"]
 [ext_resource type="Animation" uid="uid://bmqd2vk2mmytx" path="res://fox/CustomTracks/TouchGround.res" id="7_kjp0d"]
 
-[sub_resource type="Animation" id="Animation_8bmck"]
-length = 0.001
-tracks/0/type = "rotation_3d"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("%GeneralSkeleton:Bone.006")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1)
-
 [sub_resource type="Animation" id="Animation_xyhcr"]
 resource_name = "Dash"
 length = 0.2393
@@ -287,6 +277,16 @@ tracks/37/path = NodePath("%GeneralSkeleton:R_leg_3")
 tracks/37/interp = 1
 tracks/37/loop_wrap = true
 tracks/37/keys = PackedFloat32Array(0, 1, -2.5332e-07, -1.17421e-05, 7.98702e-06, 0.233333, 1, -1.12802e-06, -7.17044e-06, 6.16908e-05, 0.266667, 1, -0.000136079, 0.000132579, 0.00494356, 0.3, 1, -0.000390269, 0.000770233, 0.0141341, 0.333333, 1, -0.000595875, 0.00254808, 0.0216111, 0.366667, 1, -0.000120135, 0.000498113, 0.00435845, 0.4, 1, -1.87457e-06, -2.58919e-05, 3.48657e-05, 0.666667, 1, -2.45869e-07, -1.17421e-05, 7.98702e-06)
+
+[sub_resource type="Animation" id="Animation_8bmck"]
+length = 0.001
+tracks/0/type = "rotation_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("%GeneralSkeleton:Bone.006")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1)
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_bxn86"]
 _data = {

@@ -1,16 +1,14 @@
 [gd_scene load_steps=7 format=3 uid="uid://chdhygram7hdk"]
 
-[ext_resource type="PackedScene" uid="uid://bd5iop1wxlaxd" path="res://Scenes/Box.tscn" id="2_t7iv1"]
 [ext_resource type="PackedScene" uid="uid://ciisgvtccog6o" path="res://Scenes/Character.tscn" id="3_2nifc"]
+[ext_resource type="PackedScene" uid="uid://swq4rdq4kfve" path="res://Scenes/Enemy.tscn" id="3_8rbpu"]
 [ext_resource type="PackedScene" uid="uid://c2lhkdyy7h3ur" path="res://Scenes/Coin.tscn" id="3_wkftn"]
+[ext_resource type="PackedScene" uid="uid://2uk0kc18uuof" path="res://EnemyProjectile.tscn" id="4_fuudy"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_bexhn"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_t7iv1"]
 size = Vector3(3.23, 0.08, 3.593)
-
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_t7iv1"]
-bounce = 0.3
 
 [node name="Level" type="Node3D"]
 
@@ -34,28 +32,6 @@ shadow_enabled = true
 [node name="CharacterBody3D" parent="." instance=ExtResource("3_2nifc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.88159, 0.978029, 4.42752)
 
-[node name="Boxes" type="Node3D" parent="."]
-
-[node name="Box" parent="Boxes" instance=ExtResource("2_t7iv1")]
-transform = Transform3D(0.7701, 0.635554, 0.0549279, -0.530986, 0.686346, -0.496974, -0.353553, 0.353553, 0.866025, 0, 4.00395, 0)
-mass = 1.0
-physics_material_override = SubResource("PhysicsMaterial_t7iv1")
-
-[node name="Box2" parent="Boxes" instance=ExtResource("2_t7iv1")]
-transform = Transform3D(0.7701, 0.635554, 0.0549279, -0.530986, 0.686346, -0.496974, -0.353553, 0.353553, 0.866025, 0.810079, 4.90363, 1.77926)
-mass = 1.0
-physics_material_override = SubResource("PhysicsMaterial_t7iv1")
-
-[node name="Box3" parent="Boxes" instance=ExtResource("2_t7iv1")]
-transform = Transform3D(0.7701, 0.635554, 0.0549279, -0.530986, 0.686346, -0.496974, -0.353553, 0.353553, 0.866025, 0, 6.56056, -1.22897)
-mass = 1.0
-physics_material_override = SubResource("PhysicsMaterial_t7iv1")
-
-[node name="Box4" parent="Boxes" instance=ExtResource("2_t7iv1")]
-transform = Transform3D(0.7701, 0.635554, 0.0549279, -0.530986, 0.686346, -0.496974, -0.353553, 0.353553, 0.866025, 0, 5.76689, 0)
-mass = 1.0
-physics_material_override = SubResource("PhysicsMaterial_t7iv1")
-
 [node name="Coins" type="Node3D" parent="."]
 
 [node name="Coin" parent="Coins" instance=ExtResource("3_wkftn")]
@@ -72,3 +48,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.17312, 1.06585, 0.441444)
 
 [node name="Coin5" parent="Coins" instance=ExtResource("3_wkftn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.64865, 1.06585, 0.24114)
+
+[node name="Enemy" parent="." instance=ExtResource("3_8rbpu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.8154, 1.12, -3.36562)
+PlayerPath = NodePath("../CharacterBody3D")
+ProjectileScene = ExtResource("4_fuudy")
