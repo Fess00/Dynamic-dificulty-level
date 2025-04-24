@@ -221,7 +221,7 @@ public partial class CharacterMovement : CharacterBody3D
 
         if (_health <= 0)
         {
-            RestartGame();
+            CallDeferred(nameof(RestartGame));
         }
     }
 

@@ -7,16 +7,15 @@ public partial class EnemyProjectile : Node3D
 
     [Export]
     public float LifeTime = 3.0f;
+    [Export]
+    private Area3D _area;
 
     public Vector3 Direction = Vector3.Forward;
-
     private float _timer = 0f;
-    private Area3D _area;
 
     public override void _Ready()
     {
         _timer = LifeTime;
-        _area = GetNode<Area3D>("Area3D");
         _area.BodyEntered += OnBodyEntered;
     }
 
@@ -26,7 +25,7 @@ public partial class EnemyProjectile : Node3D
 
         _timer -= (float)delta;
         if (_timer <= 0f)
-            QueueFree();
+            CallDeferred("queue_free");
     }
 
     private void OnBodyEntered(Node body)
@@ -36,7 +35,7 @@ public partial class EnemyProjectile : Node3D
             if (!player.IsInvulnerable)
             {
                 player.TakeDamage(1);
-                QueueFree();
+                CallDeferred("queue_free");
             }
         }
     }

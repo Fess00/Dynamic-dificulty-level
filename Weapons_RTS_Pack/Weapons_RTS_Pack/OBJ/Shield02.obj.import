@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://ha2fdo5jk6hq"
+path="res://.godot/imported/Shield02.obj-77dad29e76c45024337ee2e754875fc0.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Shield02.obj-77dad29e76c45024337ee2e754875fc0.mesh"]
+
+source_file="res://Weapons_RTS_Pack/Weapons_RTS_Pack/OBJ/Shield02.obj"
+dest_files=["res://.godot/imported/Shield02.obj-77dad29e76c45024337ee2e754875fc0.mesh", "res://.godot/imported/Shield02.obj-77dad29e76c45024337ee2e754875fc0.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

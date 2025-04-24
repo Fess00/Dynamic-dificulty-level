@@ -7,24 +7,34 @@ public partial class Enemy : Node3D
     public NodePath PlayerPath;
     [Export]
     public PackedScene ProjectileScene;
-
     [Export]
-    public float ShootInterval = 1.0f;
+    public float shootInterval;
 
     private Node3D _player;
-    private Area3D _detectionArea;
+    private Area3D _shootArea;
+    private Area3D _disableArea;
     private Marker3D _projectileSpawnPoint;
-    private float _shootTimer = 0f;
-    private bool _playerInRange = false;
+    private float _shootTimer;
+    private bool _playerInRange;
+    private bool _shootingDisabled;
 
     public override void _Ready()
     {
+        _playerInRange = false;
+        _shootingDisabled = false;
+        _shootTimer = 0f;
+        shootInterval = 1.0f;
+
         _player = GetNode<CharacterBody3D>(PlayerPath);
-        _detectionArea = GetNode<Area3D>("DetectionArea");
+        _shootArea = GetNode<Area3D>("ShootArea");
+        _disableArea = GetNode<Area3D>("DisableArea");
         _projectileSpawnPoint = GetNode<Marker3D>("ProjectileSpawnPoint");
 
-        _detectionArea.BodyEntered += OnBodyEntered;
-        _detectionArea.BodyExited += OnBodyExited;
+        _shootArea.BodyEntered += OnBodyEntered;
+        _shootArea.BodyExited += OnBodyExited;
+
+        _disableArea.BodyEntered += OnDisableBodyEnter;
+        _disableArea.BodyExited += OnDisableBodyExit;
     }
 
     public override void _PhysicsProcess(double delta)
@@ -34,10 +44,10 @@ public partial class Enemy : Node3D
             LookAt(new Vector3(_player.GlobalTransform.Origin.X, GlobalTransform.Origin.Y, _player.GlobalTransform.Origin.Z), Vector3.Up);
 
             _shootTimer -= (float)delta;
-            if (_shootTimer <= 0f)
+            if (_shootTimer <= 0f && !_shootingDisabled)
             {
                 Shoot();
-                _shootTimer = ShootInterval;
+                _shootTimer = shootInterval;
             }
         }
     }
@@ -47,7 +57,7 @@ public partial class Enemy : Node3D
         if (body == _player)
         {
             _playerInRange = true;
-            _shootTimer = 0f; // сразу стреляем
+            _shootTimer = 0f;
         }
     }
 
@@ -55,6 +65,18 @@ public partial class Enemy : Node3D
     {
         if (body == _player)
             _playerInRange = false;
+    }
+
+    private void OnDisableBodyEnter(Node body)
+    {
+        if (body == _player)
+            _shootingDisabled = true;
+    }
+
+    private void OnDisableBodyExit(Node body)
+    {
+        if (body == _player)
+            _shootingDisabled = false;
     }
 
     private void Shoot()
@@ -70,7 +92,5 @@ public partial class Enemy : Node3D
         trans.Y += 0.8f;
         var dir = (trans - projectile.GlobalTransform.Origin).Normalized();
         (projectile as EnemyProjectile).Direction = dir;
-
-        GetTree().CurrentScene.AddChild(projectile);
     }
 }

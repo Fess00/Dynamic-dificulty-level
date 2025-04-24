@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://b3hh8cmg13ldn"
+path="res://.godot/imported/BlueTeam_TwoHandSwordsMen_Unit.obj-e7a4a70c33be8d7041b2be4aeef5a574.mesh"
+
+[deps]
+
+files=["res://.godot/imported/BlueTeam_TwoHandSwordsMen_Unit.obj-e7a4a70c33be8d7041b2be4aeef5a574.mesh"]
+
+source_file="res://TinyUnitsAnimated_RTS/TinyUnitsAnimated_RTS/BlueTeam/OBJ/BlueTeam_TwoHandSwordsMen_Unit.obj"
+dest_files=["res://.godot/imported/BlueTeam_TwoHandSwordsMen_Unit.obj-e7a4a70c33be8d7041b2be4aeef5a574.mesh", "res://.godot/imported/BlueTeam_TwoHandSwordsMen_Unit.obj-e7a4a70c33be8d7041b2be4aeef5a574.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bxewmj51o2ekj"
+path="res://.godot/imported/BlueTeam_Archer_Unit.obj-9dca99cd1871d6aa20072f4ddc6651de.mesh"
+
+[deps]
+
+files=["res://.godot/imported/BlueTeam_Archer_Unit.obj-9dca99cd1871d6aa20072f4ddc6651de.mesh"]
+
+source_file="res://TinyUnitsAnimated_RTS/TinyUnitsAnimated_RTS/BlueTeam/OBJ/BlueTeam_Archer_Unit.obj"
+dest_files=["res://.godot/imported/BlueTeam_Archer_Unit.obj-9dca99cd1871d6aa20072f4ddc6651de.mesh", "res://.godot/imported/BlueTeam_Archer_Unit.obj-9dca99cd1871d6aa20072f4ddc6651de.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

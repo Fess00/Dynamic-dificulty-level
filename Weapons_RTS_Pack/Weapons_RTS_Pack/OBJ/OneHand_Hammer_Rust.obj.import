@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cvvf5eek7irpx"
+path="res://.godot/imported/OneHand_Hammer_Rust.obj-864b285f2c507a1c89ecb12e44483a3f.mesh"
+
+[deps]
+
+files=["res://.godot/imported/OneHand_Hammer_Rust.obj-864b285f2c507a1c89ecb12e44483a3f.mesh"]
+
+source_file="res://Weapons_RTS_Pack/Weapons_RTS_Pack/OBJ/OneHand_Hammer_Rust.obj"
+dest_files=["res://.godot/imported/OneHand_Hammer_Rust.obj-864b285f2c507a1c89ecb12e44483a3f.mesh", "res://.godot/imported/OneHand_Hammer_Rust.obj-864b285f2c507a1c89ecb12e44483a3f.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

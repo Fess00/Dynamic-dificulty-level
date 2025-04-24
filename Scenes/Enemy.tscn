@@ -1,21 +1,36 @@
-[gd_scene load_steps=4 format=3 uid="uid://swq4rdq4kfve"]
+[gd_scene load_steps=6 format=3 uid="uid://swq4rdq4kfve"]
 
 [ext_resource type="Script" uid="uid://bnljft5f0vbfa" path="res://Scripts/Enemy.cs" id="1_tt7e2"]
+[ext_resource type="PackedScene" uid="uid://cn6qrqvygoy7f" path="res://TinyUnitsAnimated_RTS/TinyUnitsAnimated_RTS/RedTeam/FBX/RedTeam_Archer_Unit.fbx" id="2_wovta"]
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_gqquq"]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_m1htj"]
+height = 1.93605
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_m1htj"]
 radius = 8.911
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_wovta"]
+radius = 3.35603
+
 [node name="Enemy" type="Node3D"]
 script = ExtResource("1_tt7e2")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("CapsuleMesh_gqquq")
+[node name="RigidBody3D" type="RigidBody3D" parent="."]
 
-[node name="DetectionArea" type="Area3D" parent="."]
+[node name="RedTeam_Archer_Unit" parent="RigidBody3D" instance=ExtResource("2_wovta")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, -0.782337, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="DetectionArea"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+shape = SubResource("CapsuleShape3D_m1htj")
+
+[node name="ShootArea" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ShootArea"]
 shape = SubResource("SphereShape3D_m1htj")
 
 [node name="ProjectileSpawnPoint" type="Marker3D" parent="."]
+
+[node name="DisableArea" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DisableArea"]
+shape = SubResource("SphereShape3D_wovta")

@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://csea3jc7pki0y"
+path="res://.godot/imported/WizardTree.obj-5364bee4509a8488b411dc310e36011b.mesh"
+
+[deps]
+
+files=["res://.godot/imported/WizardTree.obj-5364bee4509a8488b411dc310e36011b.mesh"]
+
+source_file="res://Models/Models/Environoment Pack V.1/OBJ/WizardTree.obj"
+dest_files=["res://.godot/imported/WizardTree.obj-5364bee4509a8488b411dc310e36011b.mesh", "res://.godot/imported/WizardTree.obj-5364bee4509a8488b411dc310e36011b.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

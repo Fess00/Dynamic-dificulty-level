@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://fabcmrtx0imx"
+path="res://.godot/imported/OneHand_Axe_Rust.obj-0ad7bcb56a30794a4faa634579e84651.mesh"
+
+[deps]
+
+files=["res://.godot/imported/OneHand_Axe_Rust.obj-0ad7bcb56a30794a4faa634579e84651.mesh"]
+
+source_file="res://Weapons_RTS_Pack/Weapons_RTS_Pack/OBJ/OneHand_Axe_Rust.obj"
+dest_files=["res://.godot/imported/OneHand_Axe_Rust.obj-0ad7bcb56a30794a4faa634579e84651.mesh", "res://.godot/imported/OneHand_Axe_Rust.obj-0ad7bcb56a30794a4faa634579e84651.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

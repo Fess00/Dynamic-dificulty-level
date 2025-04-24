@@ -10,8 +10,9 @@ material = SubResource("StandardMaterial3D_q8knp")
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_ul6jj"]
 
-[node name="EnemyProjectile" type="Node3D"]
+[node name="EnemyProjectile" type="Node3D" node_paths=PackedStringArray("_area")]
 script = ExtResource("1_q8knp")
+_area = NodePath("Area3D")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("SphereMesh_ul6jj")

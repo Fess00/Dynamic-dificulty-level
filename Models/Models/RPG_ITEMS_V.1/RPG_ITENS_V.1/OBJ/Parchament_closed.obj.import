@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://xergcr1jmsul"
+path="res://.godot/imported/Parchament_closed.obj-fb76b3d58265391355701b297fd6c0dd.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Parchament_closed.obj-fb76b3d58265391355701b297fd6c0dd.mesh"]
+
+source_file="res://Models/Models/RPG_ITEMS_V.1/RPG_ITENS_V.1/OBJ/Parchament_closed.obj"
+dest_files=["res://.godot/imported/Parchament_closed.obj-fb76b3d58265391355701b297fd6c0dd.mesh", "res://.godot/imported/Parchament_closed.obj-fb76b3d58265391355701b297fd6c0dd.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

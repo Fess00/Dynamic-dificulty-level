@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://veg4su3efflq"
+path="res://.godot/imported/Staff01.obj-9c73e9519b1250c611d1caf71902fadb.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Staff01.obj-9c73e9519b1250c611d1caf71902fadb.mesh"]
+
+source_file="res://Weapons_RTS_Pack/Weapons_RTS_Pack/OBJ/Staff01.obj"
+dest_files=["res://.godot/imported/Staff01.obj-9c73e9519b1250c611d1caf71902fadb.mesh", "res://.godot/imported/Staff01.obj-9c73e9519b1250c611d1caf71902fadb.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false
